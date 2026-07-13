@@ -58,9 +58,13 @@
   .spine svg{ width:100%; height:100%; }
 
   .slide{
-    position:absolute; inset:0; left:64px;
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:44px;
+    left:64px;
     display:none;
-    padding:48px 64px 44px 56px;
+    padding:60px 80px 40px 60px;
     flex-direction:column;
   }
   .slide.active{ display:flex; animation:rise .45s ease; }
@@ -159,9 +163,10 @@
   .title-slide{ justify-content:center; align-items:flex-start; position:relative; }
   .title-slide .bg-tree{ position:absolute; right:4%; top:10%; opacity:.5; width:34%; height:auto; }
   .title-slide h1{ max-width:92%; font-size:clamp(28px,3.2vw,44px); }
-  .presenter{ margin-top:auto; display:flex; gap:28px; align-items:center; }
+  .presenter{ display:flex; gap:28px; align-items:center; }
   .presenter .line{ width:44px; height:2px; background:var(--accent); }
   .presenter .meta{ font-family:var(--mono); font-size:16px; color:var(--muted); line-height:1.8; }
+  .title-slide .presenter{ margin-top:40px; }
 
   /* ---------- closing slide ---------- */
   .end-slide{ align-items:center; justify-content:center; text-align:center; }
@@ -228,10 +233,10 @@
       <div class="presenter">
         <div class="line"></div>
         <div class="meta">
-          <span style="color:var(--accent)">NAMA</span>&nbsp;&nbsp;: <span style="color:var(--ink)">Muhammad Jepri</span><br>
-          <span style="color:var(--accent)">NIM</span>&nbsp;&nbsp;&nbsp;&nbsp;: <span style="color:var(--ink)">255410014</span><br>
-          <span style="color:var(--accent)">KELAS</span>&nbsp;: <span style="color:var(--ink)">Informatika 1 (IF-1)</span><br>
-          <span style="color:var(--accent)">DOSEN</span>&nbsp;: <span style="color:var(--ink)">Ilham Rais Arvianto, M.Pd.</span>
+          <span style="display:inline-block; width:80px; color:var(--accent)">NAMA</span>: <span style="color:var(--ink)">Muhammad Jepri</span><br>
+          <span style="display:inline-block; width:80px; color:var(--accent)">NIM</span>: <span style="color:var(--ink)">255410014</span><br>
+          <span style="display:inline-block; width:80px; color:var(--accent)">KELAS</span>: <span style="color:var(--ink)">Informatika 1 (IF-1)</span><br>
+          <span style="display:inline-block; width:80px; color:var(--accent)">DOSEN</span>: <span style="color:var(--ink)">Ilham Rais Arvianto, M.Pd.</span>
         </div>
       </div>
       <svg class="bg-tree" viewBox="0 0 400 260" fill="none" preserveAspectRatio="xMidYMid meet">
