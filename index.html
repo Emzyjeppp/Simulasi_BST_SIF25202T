@@ -160,13 +160,13 @@
   }
 
   /* ---------- title slide ---------- */
-  .title-slide{ justify-content:center; align-items:flex-start; position:relative; }
+  .title-slide{ justify-content:center; align-items:flex-start; position:relative; gap:40px; }
   .title-slide .bg-tree{ position:absolute; right:4%; top:10%; opacity:.5; width:34%; height:auto; }
   .title-slide h1{ max-width:92%; font-size:clamp(28px,3.2vw,44px); }
+  .title-group{ display:flex; flex-direction:column; gap:16px; }
   .presenter{ display:flex; gap:28px; align-items:center; }
   .presenter .line{ width:44px; height:2px; background:var(--accent); }
   .presenter .meta{ font-family:var(--mono); font-size:16px; color:var(--muted); line-height:1.8; }
-  .title-slide .presenter{ margin-top:40px; }
 
   /* ---------- closing slide ---------- */
   .end-slide{ align-items:center; justify-content:center; text-align:center; }
@@ -227,17 +227,35 @@
 
     <!-- 1 : JUDUL -->
     <section class="slide active title-slide" data-index="0">
-      <div class="eyebrow">SIF25202T · Matematika Komputasi</div>
-      <h1>Simulasi Pencarian Data<br>Menggunakan <span class="accent-text">Binary Search Tree</span></h1>
-      <p class="sub">Studi implementasi konsep pohon (tree) untuk kebutuhan computing — CPMK IF‑08‑SIF25202T‑04.</p>
+      <div class="title-group">
+        <div class="eyebrow">SIF25202T · Matematika Komputasi</div>
+        <h1>Simulasi Pencarian Data<br>Menggunakan <span class="accent-text">Binary Search Tree</span></h1>
+        <p class="sub">Studi implementasi konsep pohon (tree) untuk kebutuhan computing — CPMK IF‑08‑SIF25202T‑04.</p>
+      </div>
       <div class="presenter">
         <div class="line"></div>
-        <div class="meta">
-          <span style="display:inline-block; width:80px; color:var(--accent)">NAMA</span>: <span style="color:var(--ink)">Muhammad Jepri</span><br>
-          <span style="display:inline-block; width:80px; color:var(--accent)">NIM</span>: <span style="color:var(--ink)">255410014</span><br>
-          <span style="display:inline-block; width:80px; color:var(--accent)">KELAS</span>: <span style="color:var(--ink)">Informatika 1 (IF-1)</span><br>
-          <span style="display:inline-block; width:80px; color:var(--accent)">DOSEN</span>: <span style="color:var(--ink)">Ilham Rais Arvianto, M.Pd.</span>
-        </div>
+        <table style="border: none; border-collapse: collapse; font-family: var(--mono); font-size: 16px; line-height: 1.8; margin: 0;">
+          <tr style="background: transparent;">
+            <td style="color: var(--accent); padding: 2px 12px 2px 0; border: none; text-align: left; font-weight: 600; font-family: var(--mono); width: 80px;">NAMA</td>
+            <td style="color: var(--muted); padding: 2px 12px 2px 0; border: none; font-family: var(--mono); width: 15px;">:</td>
+            <td style="color: var(--ink); padding: 2px 0; border: none; font-family: var(--mono); font-weight: 500;">Muhammad Jepri</td>
+          </tr>
+          <tr style="background: transparent;">
+            <td style="color: var(--accent); padding: 2px 12px 2px 0; border: none; text-align: left; font-weight: 600; font-family: var(--mono); width: 80px;">NIM</td>
+            <td style="color: var(--muted); padding: 2px 12px 2px 0; border: none; font-family: var(--mono); width: 15px;">:</td>
+            <td style="color: var(--ink); padding: 2px 0; border: none; font-family: var(--mono); font-weight: 500;">255410014</td>
+          </tr>
+          <tr style="background: transparent;">
+            <td style="color: var(--accent); padding: 2px 12px 2px 0; border: none; text-align: left; font-weight: 600; font-family: var(--mono); width: 80px;">KELAS</td>
+            <td style="color: var(--muted); padding: 2px 12px 2px 0; border: none; font-family: var(--mono); width: 15px;">:</td>
+            <td style="color: var(--ink); padding: 2px 0; border: none; font-family: var(--mono); font-weight: 500;">Informatika 1 (IF-1)</td>
+          </tr>
+          <tr style="background: transparent;">
+            <td style="color: var(--accent); padding: 2px 12px 2px 0; border: none; text-align: left; font-weight: 600; font-family: var(--mono); width: 80px;">DOSEN</td>
+            <td style="color: var(--muted); padding: 2px 12px 2px 0; border: none; font-family: var(--mono); width: 15px;">:</td>
+            <td style="color: var(--ink); padding: 2px 0; border: none; font-family: var(--mono); font-weight: 500;">Ilham Rais Arvianto, M.Pd.</td>
+          </tr>
+        </table>
       </div>
       <svg class="bg-tree" viewBox="0 0 400 260" fill="none" preserveAspectRatio="xMidYMid meet">
         <g stroke="rgba(87,225,196,0.35)" stroke-width="1.4">
