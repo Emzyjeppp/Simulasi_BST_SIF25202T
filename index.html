@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulasi Pencarian Data — Binary Search Tree</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0D1315;
+    --bg-2: #121A1D;
+    --panel: #16201F;
+    --panel-line: rgba(236,239,239,0.09);
+    --ink: #ECEFEF;
+    --muted: #8CA2A2;
+    --muted-2: #5E7373;
+    --accent: #57E1C4;
+    --accent-dim: rgba(87,225,196,0.14);
+    --amber: #F2A65A;
+    --amber-dim: rgba(242,166,90,0.14);
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Inter', sans-serif;
+    --display: 'Space Grotesk', sans-serif;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{
+    height:100%; background:var(--bg); color:var(--ink);
+    font-family:var(--sans); overflow:hidden;
+  }
+  body{
+    background-image:
+      radial-gradient(circle at 85% 8%, rgba(87,225,196,0.06), transparent 45%),
+      radial-gradient(circle at 8% 92%, rgba(242,166,90,0.05), transparent 40%);
+  }
+
+  /* ---------- deck shell ---------- */
+  .deck{
+    position:relative; width:100vw; height:100vh;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .stage{
+    position:relative; width:min(94vw, 177.7vh); height:min(94vh, 168.75vw);
+    aspect-ratio:16/9; background:var(--bg-2);
+    border:1px solid var(--panel-line); border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 40px 100px rgba(0,0,0,0.55);
+  }
+
+  /* spine motif: branching structure along left edge */
+  .spine{
+    position:absolute; left:0; top:0; height:100%; width:64px;
+    border-right:1px solid var(--panel-line);
+    background:linear-gradient(180deg, var(--bg-2), var(--panel));
+    z-index:2;
+  }
+  .spine svg{ width:100%; height:100%; }
+
+  .slide{
+    position:absolute; inset:0; left:64px;
+    display:none;
+    padding:64px 76px 58px 56px;
+    flex-direction:column;
+  }
+  .slide.active{ display:flex; animation:rise .45s ease; }
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(14px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .eyebrow{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--accent); margin-bottom:14px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:''; width:16px; height:1px; background:var(--accent); }
+
+  h1{
+    font-family:var(--display); font-weight:600; letter-spacing:-0.01em;
+    font-size:clamp(26px, 3.1vw, 42px); line-height:1.12; color:var(--ink);
+    max-width:88%;
+  }
+  h2{
+    font-family:var(--display); font-weight:600; font-size:clamp(20px,2vw,26px);
+    color:var(--ink); margin-bottom:18px; letter-spacing:-0.01em;
+  }
+  .sub{
+    font-family:var(--sans); color:var(--muted); font-size:clamp(14px,1.15vw,17px);
+    max-width:70%; margin-top:14px; line-height:1.55;
+  }
+  p{ color:var(--muted); font-size:clamp(13.5px,1.05vw,16px); line-height:1.65; max-width:62ch; }
+  strong{ color:var(--ink); font-weight:600; }
+  .accent-text{ color:var(--accent); }
+
+  .body-area{ flex:1; display:flex; align-items:center; margin-top:8px; min-height:0; }
+
+  /* ---------- reusable bits ---------- */
+  .tag{
+    font-family:var(--mono); font-size:11px; color:var(--muted-2);
+    border:1px solid var(--panel-line); padding:3px 9px; border-radius:20px;
+    display:inline-block;
+  }
+  .num{ font-family:var(--mono); color:var(--accent); }
+
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; width:100%; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:28px; width:100%; align-items:center; }
+
+  .card{
+    background:var(--panel); border:1px solid var(--panel-line); border-radius:10px;
+    padding:20px 20px 18px; display:flex; flex-direction:column; gap:8px;
+  }
+  .card .k{ font-family:var(--mono); font-size:11px; color:var(--accent); letter-spacing:.06em; text-transform:uppercase; }
+  .card h3{ font-family:var(--display); font-size:17px; font-weight:600; color:var(--ink); }
+  .card p{ font-size:13px; max-width:none; }
+
+  ul.points{ list-style:none; display:flex; flex-direction:column; gap:14px; }
+  ul.points li{
+    display:flex; gap:14px; align-items:flex-start; font-size:clamp(13.5px,1.05vw,16px);
+    color:var(--muted); line-height:1.55; max-width:60ch;
+  }
+  ul.points li .bullet-num{
+    font-family:var(--mono); font-size:12px; color:var(--accent);
+    border:1px solid var(--accent-dim); background:var(--accent-dim);
+    width:22px; height:22px; border-radius:6px; display:flex; align-items:center; justify-content:center;
+    flex-shrink:0; margin-top:1px;
+  }
+  ul.points li b{ color:var(--ink); font-weight:600; }
+
+  code, .code-block{ font-family:var(--mono); }
+  .code-block{
+    background:var(--panel); border:1px solid var(--panel-line); border-radius:10px;
+    padding:16px 18px; font-size:12.5px; line-height:1.7; color:#CBEFE5;
+    overflow:auto; width:100%;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .code-block .c-kw{ color:var(--amber); }
+  .code-block .c-fn{ color:var(--accent); }
+  .code-block .c-cm{ color:var(--muted-2); font-style:italic; }
+
+  table.data{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  table.data th, table.data td{
+    border:1px solid var(--panel-line); padding:10px 12px; text-align:center;
+  }
+  table.data th{
+    font-family:var(--mono); font-size:11px; letter-spacing:.05em; text-transform:uppercase;
+    color:var(--accent); background:var(--accent-dim); font-weight:500;
+  }
+  table.data td{ color:var(--muted); }
+  table.data td.hi{ color:var(--ink); font-weight:600; }
+
+  .kicker-lg{
+    font-family:var(--display); font-size:clamp(40px,6vw,84px); font-weight:700;
+    color:var(--ink); line-height:1;
+  }
+
+  /* ---------- title slide ---------- */
+  .title-slide{ justify-content:center; align-items:flex-start; position:relative; }
+  .title-slide .bg-tree{ position:absolute; right:4%; top:10%; opacity:.5; width:34%; height:auto; }
+  .title-slide h1{ max-width:92%; font-size:clamp(30px,3.6vw,50px); }
+  .presenter{ margin-top:auto; display:flex; gap:28px; align-items:center; }
+  .presenter .line{ width:34px; height:1px; background:var(--panel-line); }
+  .presenter .meta{ font-family:var(--mono); font-size:12px; color:var(--muted-2); line-height:1.8; }
+
+  /* ---------- closing slide ---------- */
+  .end-slide{ align-items:center; justify-content:center; text-align:center; }
+  .end-slide h1{ max-width:100%; }
+
+  /* ---------- footer / progress ---------- */
+  .hud{
+    position:absolute; left:64px; right:0; bottom:0; height:44px; z-index:3;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 30px; border-top:1px solid var(--panel-line);
+    background:linear-gradient(180deg, transparent, rgba(0,0,0,0.14));
+  }
+  .dots{ display:flex; gap:6px; }
+  .dot{ width:5px; height:5px; border-radius:50%; background:var(--panel-line); transition:all .25s ease; }
+  .dot.active{ background:var(--accent); width:16px; border-radius:3px; }
+  .hud-label{ font-family:var(--mono); font-size:11px; color:var(--muted-2); letter-spacing:.05em; }
+
+  /* ---------- nav zones + controls ---------- */
+  .nav-zone{ position:absolute; top:0; bottom:44px; width:14%; z-index:5; cursor:pointer; }
+  .nav-zone.prev{ left:64px; }
+  .nav-zone.next{ right:0; }
+  .ctrl{
+    position:absolute; top:16px; right:20px; z-index:6; display:flex; gap:8px;
+  }
+  .ctrl button{
+    font-family:var(--mono); font-size:11px; color:var(--muted);
+    background:rgba(255,255,255,0.04); border:1px solid var(--panel-line);
+    padding:6px 10px; border-radius:6px; cursor:pointer; transition:.2s;
+  }
+  .ctrl button:hover{ color:var(--ink); border-color:var(--accent); }
+
+  .hint{
+    position:fixed; bottom:14px; left:50%; transform:translateX(-50%);
+    font-family:var(--mono); font-size:11px; color:var(--muted-2); z-index:10;
+    opacity:.8;
+  }
+
+  @media (max-width: 720px){
+    .stage{ width:98vw; height:auto; aspect-ratio:16/10; }
+    .grid3{ grid-template-columns:1fr; }
+    .grid2{ grid-template-columns:1fr; }
+    .sub{ max-width:100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+  <div class="stage" id="stage">
+    <div class="spine"><svg viewBox="0 0 64 800" preserveAspectRatio="none">
+      <line x1="32" y1="0" x2="32" y2="800" stroke="rgba(236,239,239,0.06)" stroke-width="1"/>
+      <g id="spine-nodes"></g>
+    </svg></div>
+
+    <div class="ctrl">
+      <button id="fsBtn">Fullscreen</button>
+    </div>
+
+    <!-- 1 : TITLE -->
+    <section class="slide active title-slide" data-index="0">
+      <div class="eyebrow">SIF25202T · Matematika Komputasi</div>
+      <h1>Simulasi Pencarian Data<br>Menggunakan <span class="accent-text">Binary Search Tree</span></h1>
+      <p class="sub">Studi implementasi konsep pohon (tree) untuk kebutuhan computing — CPMK IF‑08‑SIF25202T‑04.</p>
+      <div class="presenter">
+        <div class="line"></div>
+        <div class="meta">NAMA&nbsp;&nbsp;: Muhammad Jepri<br>NIM&nbsp;&nbsp;&nbsp;&nbsp;: 255410014<br>KELAS&nbsp;: Informatika 1 (IF-1)<br>DOSEN&nbsp;: Ilham Rais Arvianto, M.Pd.</div>
+      </div>
+      <svg class="bg-tree" viewBox="0 0 400 260" fill="none" preserveAspectRatio="xMidYMid meet">
+        <g stroke="rgba(87,225,196,0.35)" stroke-width="1.4">
+          <line x1="200" y1="30" x2="110" y2="100"/><line x1="200" y1="30" x2="290" y2="100"/>
+          <line x1="110" y1="100" x2="60" y2="170"/><line x1="110" y1="100" x2="160" y2="170"/>
+          <line x1="290" y1="100" x2="240" y2="170"/><line x1="290" y1="100" x2="340" y2="170"/>
+          <line x1="60" y1="170" x2="30" y2="240"/><line x1="60" y1="170" x2="90" y2="240"/>
+          <line x1="160" y1="170" x2="135" y2="240"/><line x1="160" y1="170" x2="185" y2="240"/>
+          <line x1="240" y1="170" x2="215" y2="240"/><line x1="240" y1="170" x2="265" y2="240"/>
+          <line x1="340" y1="170" x2="315" y2="240"/><line x1="340" y1="170" x2="365" y2="240"/>
+        </g>
+        <g fill="#0D1315" stroke="#57E1C4" stroke-width="1.6">
+          <circle cx="200" cy="30" r="8"/>
+          <circle cx="110" cy="100" r="7"/><circle cx="290" cy="100" r="7"/>
+          <circle cx="60" cy="170" r="6"/><circle cx="160" cy="170" r="6"/><circle cx="240" cy="170" r="6"/><circle cx="340" cy="170" r="6"/>
+          <circle cx="30" cy="240" r="5"/><circle cx="90" cy="240" r="5"/><circle cx="135" cy="240" r="5"/><circle cx="185" cy="240" r="5"/>
+          <circle cx="215" cy="240" r="5"/><circle cx="265" cy="240" r="5"/><circle cx="315" cy="240" r="5"/><circle cx="365" cy="240" r="5"/>
+        </g>
+      </svg>
+    </section>
+
+    <!-- 2 : LATAR BELAKANG -->
+    <section class="slide" data-index="1">
+      <div class="eyebrow">01 · Latar Belakang</div>
+      <h2>Pencarian data linear tidak lagi efisien</h2>
+      <div class="body-area">
+        <div class="grid2">
+          <ul class="points">
+            <li><span class="bullet-num">1</span><span>Volume data yang dikelola sistem terus bertambah besar setiap saat.</span></li>
+            <li><span class="bullet-num">2</span><span><b>Pencarian linear</b> memeriksa data satu per satu — kompleksitas <b>O(n)</b>, lambat pada data besar.</span></li>
+            <li><span class="bullet-num">3</span><span>Struktur <b>pohon (tree)</b> menawarkan cara menyimpan data yang mendukung pencarian jauh lebih cepat.</span></li>
+            <li><span class="bullet-num">4</span><span><b>Binary Search Tree (BST)</b> memanfaatkan sifat terurut untuk mempercepat insert, search, dan delete.</span></li>
+          </ul>
+          <div class="card" style="align-items:center; text-align:center; gap:4px;">
+            <div class="k">Perbandingan Kasar</div>
+            <div class="kicker-lg accent-text">O(log n)</div>
+            <p style="max-width:none;">vs pencarian linear <b style="color:var(--ink)">O(n)</b> — makin besar data, makin terasa selisihnya.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 : TUJUAN -->
+    <section class="slide" data-index="2">
+      <div class="eyebrow">02 · Rumusan Masalah & Tujuan</div>
+      <h2>Apa yang ingin dijawab makalah ini?</h2>
+      <div class="body-area">
+        <div class="grid3">
+          <div class="card">
+            <div class="k">Konsep</div>
+            <h3>Definisi &amp; Sifat</h3>
+            <p>Menjelaskan konsep dasar pohon dan Binary Search Tree beserta sifat-sifatnya.</p>
+          </div>
+          <div class="card">
+            <div class="k">Implementasi</div>
+            <h3>Insert &amp; Search</h3>
+            <p>Mengimplementasikan simulasi penyisipan dan pencarian data menggunakan BST.</p>
+          </div>
+          <div class="card">
+            <div class="k">Analisis</div>
+            <h3>Efisiensi</h3>
+            <p>Membandingkan efisiensi pencarian BST terhadap pencarian linear pada data uji.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 : APA ITU POHON -->
+    <section class="slide" data-index="3">
+      <div class="eyebrow">03 · Dasar Teori</div>
+      <h2>Pohon (Tree): struktur hierarkis tanpa siklus</h2>
+      <div class="body-area">
+        <div class="grid2">
+          <svg viewBox="0 0 320 220" width="100%">
+            <g stroke="#3A4A48" stroke-width="1.4">
+              <line x1="160" y1="26" x2="90" y2="90"/><line x1="160" y1="26" x2="230" y2="90"/>
+              <line x1="90" y1="90" x2="55" y2="155"/><line x1="90" y1="90" x2="125" y2="155"/>
+              <line x1="230" y1="90" x2="270" y2="155"/>
+            </g>
+            <circle cx="160" cy="26" r="9" fill="#0D1315" stroke="#F2A65A" stroke-width="2"/>
+            <text x="160" y="30" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#F2A65A">R</text>
+            <circle cx="90" cy="90" r="8" fill="#0D1315" stroke="#57E1C4" stroke-width="1.6"/>
+            <circle cx="230" cy="90" r="8" fill="#0D1315" stroke="#57E1C4" stroke-width="1.6"/>
+            <circle cx="55" cy="155" r="7" fill="#0D1315" stroke="#5E7373" stroke-width="1.4"/>
+            <circle cx="125" cy="155" r="7" fill="#0D1315" stroke="#5E7373" stroke-width="1.4"/>
+            <circle cx="270" cy="155" r="7" fill="#0D1315" stroke="#5E7373" stroke-width="1.4"/>
+            <text x="160" y="14" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#8CA2A2">root</text>
+            <text x="55" y="180" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#8CA2A2">leaf</text>
+            <text x="125" y="180" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#8CA2A2">leaf</text>
+            <text x="270" y="180" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#8CA2A2">leaf</text>
+          </svg>
+          <ul class="points">
+            <li><span class="bullet-num">•</span><span><b>Root</b> — simpul teratas, tidak memiliki induk.</span></li>
+            <li><span class="bullet-num">•</span><span><b>Parent / Child</b> — simpul yang terhubung langsung secara bertingkat.</span></li>
+            <li><span class="bullet-num">•</span><span><b>Leaf</b> — simpul tanpa anak, berada di ujung cabang.</span></li>
+            <li><span class="bullet-num">•</span><span>Pohon dengan <b>n</b> simpul selalu memiliki tepat <b>n − 1</b> sisi, dan tidak memuat siklus.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 : BST SIFAT -->
+    <section class="slide" data-index="4">
+      <div class="eyebrow">03 · Dasar Teori</div>
+      <h2>Binary Search Tree: aturan pengurutan</h2>
+      <div class="body-area">
+        <div class="grid2">
+          <ul class="points">
+            <li><span class="bullet-num">•</span><span>Setiap simpul memiliki <b>paling banyak dua anak</b> — kiri dan kanan.</span></li>
+            <li><span class="bullet-num">•</span><span>Nilai subpohon <b class="accent-text">kiri</b> selalu <b>lebih kecil</b> dari simpul induk.</span></li>
+            <li><span class="bullet-num">•</span><span>Nilai subpohon <b class="accent-text">kanan</b> selalu <b>lebih besar</b> dari simpul induk.</span></li>
+            <li><span class="bullet-num">•</span><span>Sifat ini berlaku <b>rekursif</b> pada setiap subpohon — karena itu BST disebut juga <i>pohon pencarian</i>.</span></li>
+          </ul>
+          <svg viewBox="0 0 300 200" width="100%">
+            <g stroke="#3A4A48" stroke-width="1.4">
+              <line x1="150" y1="24" x2="90" y2="90"/><line x1="150" y1="24" x2="210" y2="90"/>
+              <line x1="90" y1="90" x2="60" y2="156"/><line x1="90" y1="90" x2="120" y2="156"/>
+            </g>
+            <circle cx="150" cy="24" r="16" fill="#16201F" stroke="#F2A65A" stroke-width="1.8"/>
+            <text x="150" y="29" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#ECEFEF">30</text>
+            <circle cx="90" cy="90" r="15" fill="#16201F" stroke="#57E1C4" stroke-width="1.6"/>
+            <text x="90" y="95" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#ECEFEF">15</text>
+            <circle cx="210" cy="90" r="15" fill="#16201F" stroke="#57E1C4" stroke-width="1.6"/>
+            <text x="210" y="95" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#ECEFEF">45</text>
+            <circle cx="60" cy="156" r="13" fill="#16201F" stroke="#5E7373" stroke-width="1.4"/>
+            <text x="60" y="160" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#ECEFEF">5</text>
+            <circle cx="120" cy="156" r="13" fill="#16201F" stroke="#5E7373" stroke-width="1.4"/>
+            <text x="120" y="160" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#ECEFEF">20</text>
+            <text x="205" y="58" font-family="IBM Plex Mono" font-size="9" fill="#57E1C4">&gt; 30</text>
+            <text x="55" y="58" font-family="IBM Plex Mono" font-size="9" fill="#57E1C4">&lt; 30</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 : OPERASI -->
+    <section class="slide" data-index="5">
+      <div class="eyebrow">03 · Dasar Teori</div>
+      <h2>Tiga operasi inti pada BST</h2>
+      <div class="body-area">
+        <div class="grid3">
+          <div class="card">
+            <div class="k">Operasi 01</div>
+            <h3>Insert</h3>
+            <p>Menyisipkan nilai baru dengan menelusuri pohon secara rekursif hingga menemukan posisi kosong yang sesuai aturan BST.</p>
+          </div>
+          <div class="card">
+            <div class="k">Operasi 02</div>
+            <h3>Search</h3>
+            <p>Membandingkan nilai target terhadap simpul saat ini, lalu bergerak ke kiri atau kanan hingga ditemukan.</p>
+          </div>
+          <div class="card">
+            <div class="k">Operasi 03</div>
+            <h3>Inorder Traversal</h3>
+            <p>Menelusuri kiri → simpul → kanan. Pada BST, hasilnya selalu berupa data <b style="color:var(--ink)">terurut menaik</b>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 : IMPLEMENTASI -->
+    <section class="slide" data-index="6">
+      <div class="eyebrow">04 · Implementasi</div>
+      <h2>Inti program: kelas Node &amp; fungsi Search</h2>
+      <div class="body-area" style="align-items:stretch;">
+        <div class="grid2" style="align-items:stretch;">
+          <div class="code-block"><span class="c-kw">class</span> <span class="c-fn">Node</span>:
+    <span class="c-kw">def</span> __init__(self, value):
+        self.value = value
+        self.left = <span class="c-kw">None</span>
+        self.right = <span class="c-kw">None</span>
+
+<span class="c-cm"># insert: rekursif, kiri jika lebih kecil,</span>
+<span class="c-cm"># kanan jika lebih besar dari node saat ini</span></div>
+          <div class="code-block"><span class="c-kw">def</span> <span class="c-fn">search</span>(self, value):
+    current = self.root
+    comparisons = 0
+    <span class="c-kw">while</span> current <span class="c-kw">is not</span> <span class="c-kw">None</span>:
+        comparisons += 1
+        <span class="c-kw">if</span> value == current.value:
+            <span class="c-kw">return</span> <span class="c-kw">True</span>, comparisons
+        <span class="c-kw">elif</span> value &lt; current.value:
+            current = current.left
+        <span class="c-kw">else</span>:
+            current = current.right
+    <span class="c-kw">return</span> <span class="c-kw">False</span>, comparisons</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 : DATA UJI -->
+    <section class="slide" data-index="7">
+      <div class="eyebrow">05 · Hasil &amp; Pembahasan</div>
+      <h2>Data uji dan struktur pohon yang terbentuk</h2>
+      <p style="margin-bottom:6px;">Data disisipkan berurutan: <span class="tag" style="color:var(--accent)">50, 30, 70, 20, 40, 60, 80, 10, 25, 35, 45</span></p>
+      <div class="body-area">
+        <svg viewBox="0 0 520 190" width="100%">
+          <g stroke="#3A4A48" stroke-width="1.3">
+            <line x1="260" y1="20" x2="150" y2="60"/><line x1="260" y1="20" x2="370" y2="60"/>
+            <line x1="150" y1="60" x2="95" y2="105"/><line x1="150" y1="60" x2="205" y2="105"/>
+            <line x1="370" y1="60" x2="315" y2="105"/><line x1="370" y1="60" x2="425" y2="105"/>
+            <line x1="95" y1="105" x2="65" y2="150"/><line x1="95" y1="105" x2="125" y2="150"/>
+            <line x1="205" y1="105" x2="175" y2="150"/><line x1="205" y1="105" x2="235" y2="150"/>
+          </g>
+          <g font-family="IBM Plex Mono" font-size="11" fill="#ECEFEF" text-anchor="middle">
+            <circle cx="260" cy="20" r="16" fill="#16201F" stroke="#F2A65A" stroke-width="1.8"/><text x="260" y="25">50</text>
+            <circle cx="150" cy="60" r="14" fill="#16201F" stroke="#57E1C4" stroke-width="1.5"/><text x="150" y="65">30</text>
+            <circle cx="370" cy="60" r="14" fill="#16201F" stroke="#57E1C4" stroke-width="1.5"/><text x="370" y="65">70</text>
+            <circle cx="95" cy="105" r="13" fill="#16201F" stroke="#5E7373" stroke-width="1.3"/><text x="95" y="110">20</text>
+            <circle cx="205" cy="105" r="13" fill="#16201F" stroke="#5E7373" stroke-width="1.3"/><text x="205" y="110">40</text>
+            <circle cx="315" cy="105" r="13" fill="#16201F" stroke="#5E7373" stroke-width="1.3"/><text x="315" y="110">60</text>
+            <circle cx="425" cy="105" r="13" fill="#16201F" stroke="#5E7373" stroke-width="1.3"/><text x="425" y="110">80</text>
+            <circle cx="65" cy="150" r="12" fill="#16201F" stroke="#3A4A48" stroke-width="1.2"/><text x="65" y="154">10</text>
+            <circle cx="125" cy="150" r="12" fill="#16201F" stroke="#3A4A48" stroke-width="1.2"/><text x="125" y="154">25</text>
+            <circle cx="175" cy="150" r="12" fill="#16201F" stroke="#3A4A48" stroke-width="1.2"/><text x="175" y="154">35</text>
+            <circle cx="235" cy="150" r="12" fill="#16201F" stroke="#3A4A48" stroke-width="1.2"/><text x="235" y="154">45</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 9 : INORDER -->
+    <section class="slide" data-index="8">
+      <div class="eyebrow">05 · Hasil &amp; Pembahasan</div>
+      <h2>Inorder traversal menghasilkan data terurut</h2>
+      <div class="body-area">
+        <div style="width:100%;">
+          <p style="margin-bottom:22px;">Penelusuran <b>kiri → simpul → kanan</b> terhadap pohon pada slide sebelumnya menghasilkan urutan berikut:</p>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <span class="num" style="font-size:22px;">10</span>
+            <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">20</span>
+            <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">25</span>
+            <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">30</span>
+            <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">35</span>
+            <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">40</span>
+            <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">45</span>
+            <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">50</span>
+            <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">60</span>
+            <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">70</span>
+            <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">80</span>
+          </div>
+          <p style="margin-top:22px;">Urutan ini <b style="color:var(--ink)">selalu menaik (ascending)</b> — membuktikan sifat dasar BST secara langsung dari hasil program.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 : PERBANDINGAN -->
+    <section class="slide" data-index="9">
+      <div class="eyebrow">05 · Hasil &amp; Pembahasan</div>
+      <h2>BST jauh lebih hemat perbandingan</h2>
+      <div class="body-area">
+        <table class="data">
+          <tr><th>Nilai Dicari</th><th>Ditemukan</th><th>Perbandingan BST</th><th>Perbandingan Linear</th></tr>
+          <tr><td class="hi">45</td><td>Ya</td><td class="hi accent-text">4</td><td>11</td></tr>
+          <tr><td class="hi">10</td><td>Ya</td><td class="hi accent-text">4</td><td>8</td></tr>
+          <tr><td class="hi">99</td><td>Tidak</td><td class="hi accent-text">3</td><td>11</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- 11 : PEMBAHASAN -->
+    <section class="slide" data-index="10">
+      <div class="eyebrow">05 · Hasil &amp; Pembahasan</div>
+      <h2>Kenapa BST lebih cepat?</h2>
+      <div class="body-area">
+        <ul class="points">
+          <li><span class="bullet-num">•</span><span>Setiap perbandingan <b>mengeliminasi separuh</b> sisa data yang mungkin — kompleksitas rata-rata <b class="accent-text">O(log n)</b>.</span></li>
+          <li><span class="bullet-num">•</span><span>Pencarian linear harus memeriksa data satu per satu — kompleksitas <b>O(n)</b> di semua kondisi.</span></li>
+          <li><span class="bullet-num">•</span><span>Keunggulan BST bergantung pada <b>keseimbangan pohon</b>. Data yang sudah terurut membuat BST menyerupai linked list (O(n)).</span></li>
+          <li><span class="bullet-num">•</span><span>Solusinya: varian pohon seimbang seperti <b>AVL Tree</b> atau <b>Red-Black Tree</b> pada aplikasi nyata.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 12 : KESIMPULAN -->
+    <section class="slide" data-index="11">
+      <div class="eyebrow">06 · Kesimpulan</div>
+      <h2>Tiga hal yang bisa dibawa pulang</h2>
+      <div class="body-area">
+        <div class="grid3">
+          <div class="card">
+            <div class="k">01</div>
+            <h3>Konsep Pohon</h3>
+            <p>BST adalah pohon biner yang menerapkan aturan pengurutan kiri &lt; simpul &lt; kanan.</p>
+          </div>
+          <div class="card">
+            <div class="k">02</div>
+            <h3>Terbukti Bekerja</h3>
+            <p>Inorder traversal membuktikan sifat BST: hasil penelusuran selalu terurut menaik.</p>
+          </div>
+          <div class="card">
+            <div class="k">03</div>
+            <h3>Lebih Efisien</h3>
+            <p>BST membutuhkan jauh lebih sedikit perbandingan dibanding pencarian linear pada data uji.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 : REFERENSI -->
+    <section class="slide" data-index="12">
+      <div class="eyebrow">07 · Referensi</div>
+      <h2>Daftar Pustaka &amp; Sumber Pendukung</h2>
+      <div class="body-area">
+        <div class="grid2">
+          <ul class="points">
+            <li><span class="bullet-num">1</span><span><b>Cormen, T. H., et al. (2022).</b> <i>Introduction to Algorithms</i> (4th ed.). MIT Press.</span></li>
+            <li><span class="bullet-num">2</span><span><b>Rosen, K. H. (2019).</b> <i>Discrete Mathematics and Its Applications</i> (8th ed.). McGraw-Hill.</span></li>
+            <li><span class="bullet-num">3</span><span><b>Munir, R. (2021).</b> <i>Matematika Diskrit</i> (Revisi Ke-6). Bandung: Penerbit Informatika.</span></li>
+          </ul>
+          <ul class="points">
+            <li><span class="bullet-num">4</span><span><b>Pramudita, R., &amp; Handrianto, Y. (2020).</b> <i>Analisis Perbandingan Algoritma Linear Search dan Binary Search dalam Efisiensi Pencarian Data.</i> Jurnal Infoman's, 14(2).</span></li>
+            <li><span class="bullet-num">5</span><span><b>Suryadi, A. (2019).</b> <i>Implementasi Teknik Binary Search Tree Pada Pencarian Data.</i> KAKIFIKOM, 1(2).</span></li>
+            <li><span class="bullet-num">6</span><span><b>Python Software Foundation (2026).</b> <i>The Python Language Reference.</i> <a href="https://docs.python.org/3/" target="_blank" style="color: var(--accent); text-decoration: none;">docs.python.org/3/</a></span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 : CLOSING -->
+    <section class="slide end-slide" data-index="13">
+      <div class="eyebrow" style="justify-content:center;">Terima Kasih</div>
+      <h1>Pertanyaan &amp; Diskusi</h1>
+      <p class="sub" style="max-width:100%; text-align:center; margin-top:16px;">Simulasi Pencarian Data Menggunakan Binary Search Tree (BST) — SIF25202T Matematika Komputasi</p>
+    </section>
+
+    <div class="hud">
+      <div class="hud-label" id="slideLabel">01 / 13</div>
+      <div class="dots" id="dots"></div>
+      <div class="hud-label">SIF25202T</div>
+    </div>
+    <div class="nav-zone prev" id="prevZone"></div>
+    <div class="nav-zone next" id="nextZone"></div>
+  </div>
+</div>
+
+<div class="hint">← → atau Space untuk navigasi &nbsp;·&nbsp; F untuk fullscreen</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dotsEl = document.getElementById('dots');
+  const labelEl = document.getElementById('slideLabel');
+  let current = 0;
+
+  // Initialize progress dots in HUD
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  });
+  const dots = Array.from(dotsEl.children);
+
+  // Initialize spine nodes (branching tree path motif along the left edge)
+  const spineNodesEl = document.getElementById('spine-nodes');
+  const totalSlides = slides.length;
+  const positions = [];
+
+  for (let i = 0; i < totalSlides; i++) {
+    const y = 60 + i * (680 / (totalSlides - 1));
+    let x = 32;
+    if (i > 0 && i < totalSlides - 1) {
+      // Simulate left/right branches of a BST
+      const dir = (i % 2 === 0) ? -1 : 1;
+      x = 32 + dir * 12;
+    }
+    positions.push({ x, y });
+  }
+
+  // Draw connecting path lines
+  for (let i = 0; i < totalSlides - 1; i++) {
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', positions[i].x);
+    line.setAttribute('y1', positions[i].y);
+    line.setAttribute('x2', positions[i + 1].x);
+    line.setAttribute('y2', positions[i + 1].y);
+    line.setAttribute('stroke', 'rgba(236,239,239,0.08)');
+    line.setAttribute('stroke-width', '1.5');
+    line.setAttribute('id', `spine-line-${i}`);
+    spineNodesEl.appendChild(line);
+  }
+
+  // Draw interactive spine circles
+  positions.forEach((pos, i) => {
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', pos.x);
+    circle.setAttribute('cy', pos.y);
+    circle.setAttribute('r', '4');
+    circle.setAttribute('fill', '#121A1D');
+    circle.setAttribute('stroke', 'rgba(236,239,239,0.2)');
+    circle.setAttribute('stroke-width', '1.5');
+    circle.setAttribute('id', `spine-node-${i}`);
+    circle.style.cursor = 'pointer';
+    circle.style.transition = 'all 0.3s ease';
+    circle.addEventListener('click', () => goTo(i));
+
+    // Simple hover tooltip showing slide name
+    const titleText = slides[i].querySelector('h2')?.textContent || slides[i].querySelector('h1')?.textContent || `Slide ${i+1}`;
+    const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+    title.textContent = titleText;
+    circle.appendChild(title);
+
+    spineNodesEl.appendChild(circle);
+  });
+
+  function render(){
+    slides.forEach((s, i) => s.classList.toggle('active', i === current));
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    labelEl.textContent = String(current + 1).padStart(2,'0') + ' / ' + slides.length;
+
+    // Update spine nodes and path lines visual states
+    for (let i = 0; i < totalSlides; i++) {
+      const circle = document.getElementById(`spine-node-${i}`);
+      if (circle) {
+        if (i === current) {
+          circle.setAttribute('fill', '#57E1C4');
+          circle.setAttribute('stroke', '#57E1C4');
+          circle.setAttribute('r', '6');
+        } else if (i < current) {
+          circle.setAttribute('fill', 'rgba(87,225,196,0.25)');
+          circle.setAttribute('stroke', 'rgba(87,225,196,0.6)');
+          circle.setAttribute('r', '4');
+        } else {
+          circle.setAttribute('fill', '#121A1D');
+          circle.setAttribute('stroke', 'rgba(236,239,239,0.2)');
+          circle.setAttribute('r', '4');
+        }
+      }
+
+      const line = document.getElementById(`spine-line-${i}`);
+      if (line) {
+        if (i < current) {
+          line.setAttribute('stroke', 'rgba(87,225,196,0.3)');
+        } else {
+          line.setAttribute('stroke', 'rgba(236,239,239,0.08)');
+        }
+      }
+    }
+  }
+
+  function goTo(i){
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    render();
+  }
+  function next(){ goTo(current + 1); }
+  function prev(){ goTo(current - 1); }
+
+  document.getElementById('nextZone').addEventListener('click', next);
+  document.getElementById('prevZone').addEventListener('click', prev);
+
+  window.addEventListener('keydown', (e) => {
+    if (['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){ e.preventDefault(); next(); }
+    if (['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){ e.preventDefault(); prev(); }
+    if (e.key === 'f' || e.key === 'F'){ toggleFullscreen(); }
+    if (e.key === 'Home'){ goTo(0); }
+    if (e.key === 'End'){ goTo(slides.length - 1); }
+  });
+
+  function toggleFullscreen(){
+    if (!document.fullscreenElement){ document.documentElement.requestFullscreen().catch(()=>{}); }
+    else { document.exitFullscreen(); }
+  }
+  document.getElementById('fsBtn').addEventListener('click', toggleFullscreen);
+
+  render();
+</script>
+</body>
+</html>
