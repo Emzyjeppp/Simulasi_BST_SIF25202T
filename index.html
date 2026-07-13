@@ -60,7 +60,7 @@
   .slide{
     position:absolute; inset:0; left:64px;
     display:none;
-    padding:64px 76px 58px 56px;
+    padding:48px 64px 44px 56px;
     flex-direction:column;
   }
   .slide.active{ display:flex; animation:rise .45s ease; }
@@ -70,26 +70,26 @@
   }
 
   .eyebrow{
-    font-family:var(--mono); font-size:12.5px; letter-spacing:.14em;
-    text-transform:uppercase; color:var(--accent); margin-bottom:14px;
+    font-family:var(--mono); font-size:12px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--accent); margin-bottom:10px;
     display:flex; align-items:center; gap:10px;
   }
   .eyebrow::before{ content:''; width:16px; height:1px; background:var(--accent); }
 
   h1{
     font-family:var(--display); font-weight:600; letter-spacing:-0.01em;
-    font-size:clamp(26px, 3.1vw, 42px); line-height:1.12; color:var(--ink);
+    font-size:clamp(26px, 3vw, 40px); line-height:1.12; color:var(--ink);
     max-width:88%;
   }
   h2{
-    font-family:var(--display); font-weight:600; font-size:clamp(20px,2vw,26px);
-    color:var(--ink); margin-bottom:18px; letter-spacing:-0.01em;
+    font-family:var(--display); font-weight:600; font-size:clamp(20px,1.8vw,24px);
+    color:var(--ink); margin-bottom:14px; letter-spacing:-0.01em;
   }
   .sub{
-    font-family:var(--sans); color:var(--muted); font-size:clamp(14px,1.15vw,17px);
-    max-width:70%; margin-top:14px; line-height:1.55;
+    font-family:var(--sans); color:var(--muted); font-size:clamp(14px,1.1vw,16px);
+    max-width:75%; margin-top:10px; line-height:1.5;
   }
-  p{ color:var(--muted); font-size:clamp(13.5px,1.05vw,16px); line-height:1.65; max-width:62ch; }
+  p{ color:var(--muted); font-size:clamp(13px,1vw,15px); line-height:1.6; max-width:62ch; }
   strong{ color:var(--ink); font-weight:600; }
   .accent-text{ color:var(--accent); }
 
@@ -103,26 +103,26 @@
   }
   .num{ font-family:var(--mono); color:var(--accent); }
 
-  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; width:100%; }
-  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:28px; width:100%; align-items:center; }
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; width:100%; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:24px; width:100%; align-items:center; }
 
   .card{
     background:var(--panel); border:1px solid var(--panel-line); border-radius:10px;
-    padding:20px 20px 18px; display:flex; flex-direction:column; gap:8px;
+    padding:18px 18px 16px; display:flex; flex-direction:column; gap:6px;
   }
-  .card .k{ font-family:var(--mono); font-size:11px; color:var(--accent); letter-spacing:.06em; text-transform:uppercase; }
-  .card h3{ font-family:var(--display); font-size:17px; font-weight:600; color:var(--ink); }
-  .card p{ font-size:13px; max-width:none; }
+  .card .k{ font-family:var(--mono); font-size:10.5px; color:var(--accent); letter-spacing:.06em; text-transform:uppercase; }
+  .card h3{ font-family:var(--display); font-size:16px; font-weight:600; color:var(--ink); }
+  .card p{ font-size:12.5px; max-width:none; line-height: 1.5; }
 
-  ul.points{ list-style:none; display:flex; flex-direction:column; gap:14px; }
+  ul.points{ list-style:none; display:flex; flex-direction:column; gap:10px; }
   ul.points li{
-    display:flex; gap:14px; align-items:flex-start; font-size:clamp(13.5px,1.05vw,16px);
-    color:var(--muted); line-height:1.55; max-width:60ch;
+    display:flex; gap:12px; align-items:flex-start; font-size:clamp(13px,1vw,15px);
+    color:var(--muted); line-height:1.5; max-width:60ch;
   }
   ul.points li .bullet-num{
-    font-family:var(--mono); font-size:12px; color:var(--accent);
+    font-family:var(--mono); font-size:11px; color:var(--accent);
     border:1px solid var(--accent-dim); background:var(--accent-dim);
-    width:22px; height:22px; border-radius:6px; display:flex; align-items:center; justify-content:center;
+    width:20px; height:20px; border-radius:6px; display:flex; align-items:center; justify-content:center;
     flex-shrink:0; margin-top:1px;
   }
   ul.points li b{ color:var(--ink); font-weight:600; }
@@ -130,7 +130,7 @@
   code, .code-block{ font-family:var(--mono); }
   .code-block{
     background:var(--panel); border:1px solid var(--panel-line); border-radius:10px;
-    padding:16px 18px; font-size:12.5px; line-height:1.7; color:#CBEFE5;
+    padding:14px 16px; font-size:11.5px; line-height:1.6; color:#CBEFE5;
     overflow:auto; width:100%;
     white-space: pre-wrap;
     word-break: break-all;
@@ -139,26 +139,26 @@
   .code-block .c-fn{ color:var(--accent); }
   .code-block .c-cm{ color:var(--muted-2); font-style:italic; }
 
-  table.data{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  table.data{ width:100%; border-collapse:collapse; font-size:13px; }
   table.data th, table.data td{
-    border:1px solid var(--panel-line); padding:10px 12px; text-align:center;
+    border:1px solid var(--panel-line); padding:8px 10px; text-align:center;
   }
   table.data th{
-    font-family:var(--mono); font-size:11px; letter-spacing:.05em; text-transform:uppercase;
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase;
     color:var(--accent); background:var(--accent-dim); font-weight:500;
   }
   table.data td{ color:var(--muted); }
   table.data td.hi{ color:var(--ink); font-weight:600; }
 
   .kicker-lg{
-    font-family:var(--display); font-size:clamp(40px,6vw,84px); font-weight:700;
+    font-family:var(--display); font-size:clamp(36px,5vw,72px); font-weight:700;
     color:var(--ink); line-height:1;
   }
 
   /* ---------- title slide ---------- */
   .title-slide{ justify-content:center; align-items:flex-start; position:relative; }
   .title-slide .bg-tree{ position:absolute; right:4%; top:10%; opacity:.5; width:34%; height:auto; }
-  .title-slide h1{ max-width:92%; font-size:clamp(30px,3.6vw,50px); }
+  .title-slide h1{ max-width:92%; font-size:clamp(28px,3.2vw,44px); }
   .presenter{ margin-top:auto; display:flex; gap:28px; align-items:center; }
   .presenter .line{ width:44px; height:2px; background:var(--accent); }
   .presenter .meta{ font-family:var(--mono); font-size:16px; color:var(--muted); line-height:1.8; }
@@ -220,7 +220,7 @@
       <button id="fsBtn">Fullscreen</button>
     </div>
 
-    <!-- 1 : TITLE -->
+    <!-- 1 : JUDUL -->
     <section class="slide active title-slide" data-index="0">
       <div class="eyebrow">SIF25202T · Matematika Komputasi</div>
       <h1>Simulasi Pencarian Data<br>Menggunakan <span class="accent-text">Binary Search Tree</span></h1>
@@ -256,56 +256,63 @@
 
     <!-- 2 : LATAR BELAKANG -->
     <section class="slide" data-index="1">
-      <div class="eyebrow">01 · Latar Belakang</div>
-      <h2>Pencarian data linear tidak lagi efisien</h2>
+      <div class="eyebrow">01 · Pendahuluan</div>
+      <h2>Latar Belakang Masalah</h2>
       <div class="body-area">
         <div class="grid2">
           <ul class="points">
-            <li><span class="bullet-num">1</span><span>Volume data yang dikelola sistem terus bertambah besar setiap saat.</span></li>
-            <li><span class="bullet-num">2</span><span><b>Pencarian linear</b> memeriksa data satu per satu — kompleksitas <b>O(n)</b>, lambat pada data besar.</span></li>
-            <li><span class="bullet-num">3</span><span>Struktur <b>pohon (tree)</b> menawarkan cara menyimpan data yang mendukung pencarian jauh lebih cepat.</span></li>
-            <li><span class="bullet-num">4</span><span><b>Binary Search Tree (BST)</b> memanfaatkan sifat terurut untuk mempercepat insert, search, dan delete.</span></li>
+            <li><span class="bullet-num">1</span><span>Volume data digital yang terus meningkat menuntut adanya metode penyimpanan data yang efisien.</span></li>
+            <li><span class="bullet-num">2</span><span><b>Pencarian Linear</b> memeriksa data satu per satu secara berurutan, menghasilkan kompleksitas waktu <b>O(n)</b> yang lambat.</span></li>
+            <li><span class="bullet-num">3</span><span>Konsep struktur data non-linear **Pohon (Tree)** menawarkan struktur hierarki yang mempercepat pencarian data.</span></li>
+            <li><span class="bullet-num">4</span><span>**Binary Search Tree (BST)** mengkombinasikan sifat terurut dari data untuk memotong jalur pencarian.</span></li>
           </ul>
           <div class="card" style="align-items:center; text-align:center; gap:4px;">
-            <div class="k">Perbandingan Kasar</div>
+            <div class="k">Efisiensi Kompleksitas</div>
             <div class="kicker-lg accent-text">O(log n)</div>
-            <p style="max-width:none;">vs pencarian linear <b style="color:var(--ink)">O(n)</b> — makin besar data, makin terasa selisihnya.</p>
+            <p style="max-width:none;">Dibandingkan pencarian linear <b style="color:var(--ink)">O(n)</b> — performa stabil saat data membesar.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 3 : TUJUAN -->
+    <!-- 3 : RUMUSAN MASALAH & TUJUAN -->
     <section class="slide" data-index="2">
-      <div class="eyebrow">02 · Rumusan Masalah & Tujuan</div>
-      <h2>Apa yang ingin dijawab makalah ini?</h2>
+      <div class="eyebrow">01 · Pendahuluan</div>
+      <h2>Rumusan Masalah &amp; Tujuan Makalah</h2>
       <div class="body-area">
-        <div class="grid3">
+        <div class="grid2" style="align-items: stretch;">
           <div class="card">
-            <div class="k">Konsep</div>
-            <h3>Definisi &amp; Sifat</h3>
-            <p>Menjelaskan konsep dasar pohon dan Binary Search Tree beserta sifat-sifatnya.</p>
+            <div class="k">Rumusan Masalah</div>
+            <ul class="points" style="gap: 8px;">
+              <li><span class="bullet-num">1</span><span style="font-size:12.5px;">Bagaimana konsep dasar struktur pohon menurut Matematika Diskrit?</span></li>
+              <li><span class="bullet-num">2</span><span style="font-size:12.5px;">Bagaimana cara mengimplementasikan operasi penyisipan dan pencarian pada BST?</span></li>
+              <li><span class="bullet-num">3</span><span style="font-size:12.5px;">Bagaimana tingkat efisiensi pencarian BST dibanding pencarian linear?</span></li>
+            </ul>
           </div>
           <div class="card">
-            <div class="k">Implementasi</div>
-            <h3>Insert &amp; Search</h3>
-            <p>Mengimplementasikan simulasi penyisipan dan pencarian data menggunakan BST.</p>
-          </div>
-          <div class="card">
-            <div class="k">Analisis</div>
-            <h3>Efisiensi</h3>
-            <p>Membandingkan efisiensi pencarian BST terhadap pencarian linear pada data uji.</p>
+            <div class="k">Tujuan</div>
+            <ul class="points" style="gap: 8px;">
+              <li><span class="bullet-num">✓</span><span style="font-size:12.5px;">Menjelaskan teoretis pohon biner dan aturan pengurutannya secara matematis.</span></li>
+              <li><span class="bullet-num">✓</span><span style="font-size:12.5px;">Membangun dan mensimulasikan sistem BST menggunakan bahasa pemrograman Python.</span></li>
+              <li><span class="bullet-num">✓</span><span style="font-size:12.5px;">Menganalisis hasil perbandingan data uji (comparison count) kedua algoritma.</span></li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 4 : APA ITU POHON -->
+    <!-- 4 : DEFINISI POHON -->
     <section class="slide" data-index="3">
-      <div class="eyebrow">03 · Dasar Teori</div>
-      <h2>Pohon (Tree): struktur hierarkis tanpa siklus</h2>
+      <div class="eyebrow">02 · Dasar Teori</div>
+      <h2>Definisi &amp; Sifat Dasar Pohon</h2>
       <div class="body-area">
         <div class="grid2">
+          <ul class="points">
+            <li><span class="bullet-num">1</span><span><b>Definisi (PDF Halaman 3):</b> Pohon (*tree*) adalah graf tak-berarah terhubung yang tidak mengandung sirkuit atau siklus (*acyclic*).</span></li>
+            <li><span class="bullet-num">2</span><span>Sebuah pohon dengan $n$ simpul (*vertex*) selalu memiliki tepat <b>$n - 1$ sisi (*edge*)</b> untuk menghubungkan seluruh simpulnya.</span></li>
+            <li><span class="bullet-num">3</span><span>Setiap pasang simpul di dalam pohon terhubung dengan **lintasan tunggal** (*unique path*).</span></li>
+            <li><span class="bullet-num">4</span><span>Penambahan satu sisi baru pada pohon akan membuat tepat satu sirkuit.</span></li>
+          </ul>
           <svg viewBox="0 0 320 220" width="100%">
             <g stroke="#3A4A48" stroke-width="1.4">
               <line x1="160" y1="26" x2="90" y2="90"/><line x1="160" y1="26" x2="230" y2="90"/>
@@ -319,32 +326,79 @@
             <circle cx="55" cy="155" r="7" fill="#0D1315" stroke="#5E7373" stroke-width="1.4"/>
             <circle cx="125" cy="155" r="7" fill="#0D1315" stroke="#5E7373" stroke-width="1.4"/>
             <circle cx="270" cy="155" r="7" fill="#0D1315" stroke="#5E7373" stroke-width="1.4"/>
-            <text x="160" y="14" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#8CA2A2">root</text>
-            <text x="55" y="180" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#8CA2A2">leaf</text>
-            <text x="125" y="180" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#8CA2A2">leaf</text>
-            <text x="270" y="180" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#8CA2A2">leaf</text>
+            <text x="160" y="14" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#8CA2A2">root (akar)</text>
+            <text x="55" y="180" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#8CA2A2">daun</text>
+            <text x="125" y="180" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#8CA2A2">daun</text>
+            <text x="270" y="180" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#8CA2A2">daun</text>
           </svg>
-          <ul class="points">
-            <li><span class="bullet-num">•</span><span><b>Root</b> — simpul teratas, tidak memiliki induk.</span></li>
-            <li><span class="bullet-num">•</span><span><b>Parent / Child</b> — simpul yang terhubung langsung secara bertingkat.</span></li>
-            <li><span class="bullet-num">•</span><span><b>Leaf</b> — simpul tanpa anak, berada di ujung cabang.</span></li>
-            <li><span class="bullet-num">•</span><span>Pohon dengan <b>n</b> simpul selalu memiliki tepat <b>n − 1</b> sisi, dan tidak memuat siklus.</span></li>
-          </ul>
         </div>
       </div>
     </section>
 
-    <!-- 5 : BST SIFAT -->
+    <!-- 5 : TERMINOLOGI POHON BERAKAR -->
     <section class="slide" data-index="4">
-      <div class="eyebrow">03 · Dasar Teori</div>
-      <h2>Binary Search Tree: aturan pengurutan</h2>
+      <div class="eyebrow">02 · Dasar Teori</div>
+      <h2>Terminologi Pohon Berakar (Rooted Tree)</h2>
+      <p style="margin-bottom: 6px;">Sesuai dengan standar materi kuliah Anda di PDF Halaman 28-34:</p>
+      <div class="body-area">
+        <div class="grid3">
+          <div class="card">
+            <div class="k">Induk &amp; Anak</div>
+            <h3>Orangtua &amp; Anak</h3>
+            <p>Simpul di atas adalah orangtua (*parent*), simpul di bawahnya yang terhubung langsung adalah anak (*child*).</p>
+          </div>
+          <div class="card">
+            <div class="k">Ujung Cabang</div>
+            <h3>Daun (Leaf)</h3>
+            <p>Simpul yang tidak memiliki anak (derajat keluar = 0). Contoh pada graf adalah ujung terluar.</p>
+          </div>
+          <div class="card">
+            <div class="k">Kedalaman</div>
+            <h3>Aras &amp; Tinggi</h3>
+            <p>Aras (*level*) dimulai dari 0 (akar). Tinggi (*height*) adalah aras maksimum dari suatu pohon berakar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 : POHON BINER & POHON TERURUT -->
+    <section class="slide" data-index="5">
+      <div class="eyebrow">02 · Dasar Teori</div>
+      <h2>Pohon Biner &amp; Pohon Terurut</h2>
       <div class="body-area">
         <div class="grid2">
           <ul class="points">
-            <li><span class="bullet-num">•</span><span>Setiap simpul memiliki <b>paling banyak dua anak</b> — kiri dan kanan.</span></li>
-            <li><span class="bullet-num">•</span><span>Nilai subpohon <b class="accent-text">kiri</b> selalu <b>lebih kecil</b> dari simpul induk.</span></li>
-            <li><span class="bullet-num">•</span><span>Nilai subpohon <b class="accent-text">kanan</b> selalu <b>lebih besar</b> dari simpul induk.</span></li>
-            <li><span class="bullet-num">•</span><span>Sifat ini berlaku <b>rekursif</b> pada setiap subpohon — karena itu BST disebut juga <i>pohon pencarian</i>.</span></li>
+            <li><span class="bullet-num">1</span><span><b>Pohon Biner (PDF Halaman 40):</b> Adalah pohon n-ary dengan $n = 2$. Setiap simpul cabangnya memiliki paling banyak 2 anak.</span></li>
+            <li><span class="bullet-num">2</span><span><b>Urutan Anak Penting:</b> Dibedakan secara eksplisit antara **anak kiri** (*left child*) dan **anak kanan** (*right child*).</span></li>
+            <li><span class="bullet-num">3</span><span><b>Pohon Terurut (PDF Halaman 36):</b> Urutan anak-anak diatur secara spesifik. Anak kiri dan anak kanan tidak boleh tertukar.</span></li>
+            <li><span class="bullet-num">4</span><span>BST menggabungkan kedua sifat ini untuk melakukan pemisahan data berdasarkan nilai numerik.</span></li>
+          </ul>
+          <svg viewBox="0 0 300 180" width="100%">
+            <g stroke="#3A4A48" stroke-width="1.4">
+              <line x1="150" y1="24" x2="100" y2="80"/><line x1="150" y1="24" x2="200" y2="80"/>
+            </g>
+            <circle cx="150" cy="24" r="16" fill="#16201F" stroke="#F2A65A" stroke-width="1.8"/>
+            <text x="150" y="28" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#ECEFEF">Akar</text>
+            <circle cx="100" cy="80" r="14" fill="#16201F" stroke="#57E1C4" stroke-width="1.6"/>
+            <text x="100" y="84" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#ECEFEF">Kiri</text>
+            <circle cx="200" cy="80" r="14" fill="#16201F" stroke="#57E1C4" stroke-width="1.6"/>
+            <text x="200" y="84" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#ECEFEF">Kanan</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 : ATURAN BST -->
+    <section class="slide" data-index="6">
+      <div class="eyebrow">02 · Dasar Teori</div>
+      <h2>Aturan Pengurutan Binary Search Tree</h2>
+      <div class="body-area">
+        <div class="grid2">
+          <ul class="points">
+            <li><span class="bullet-num">1</span><span>BST adalah pohon biner terurut dengan aturan perbandingan matematis.</span></li>
+            <li><span class="bullet-num">2</span><span>Nilai subpohon <b class="accent-text">kiri</b> selalu <b>lebih kecil</b> ($<$) dari nilai simpul induk.</span></li>
+            <li><span class="bullet-num">3</span><span>Nilai subpohon <b class="accent-text">kanan</b> selalu <b>lebih besar</b> ($>$) dari nilai simpul induk.</span></li>
+            <li><span class="bullet-num">4</span><span>Aturan ini berlaku secara **rekursif** pada setiap subpohon di dalam struktur data tersebut.</span></li>
           </ul>
           <svg viewBox="0 0 300 200" width="100%">
             <g stroke="#3A4A48" stroke-width="1.4">
@@ -361,52 +415,129 @@
             <text x="60" y="160" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#ECEFEF">5</text>
             <circle cx="120" cy="156" r="13" fill="#16201F" stroke="#5E7373" stroke-width="1.4"/>
             <text x="120" y="160" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#ECEFEF">20</text>
-            <text x="205" y="58" font-family="IBM Plex Mono" font-size="9" fill="#57E1C4">&gt; 30</text>
-            <text x="55" y="58" font-family="IBM Plex Mono" font-size="9" fill="#57E1C4">&lt; 30</text>
+            <text x="205" y="58" font-family="IBM Plex Mono" font-size="9" fill="#57E1C4">&gt; 30 (Kanan)</text>
+            <text x="55" y="58" font-family="IBM Plex Mono" font-size="9" fill="#57E1C4">&lt; 30 (Kiri)</text>
           </svg>
         </div>
       </div>
     </section>
 
-    <!-- 6 : OPERASI -->
-    <section class="slide" data-index="5">
-      <div class="eyebrow">03 · Dasar Teori</div>
-      <h2>Tiga operasi inti pada BST</h2>
+    <!-- 8 : OPERASI INSERT -->
+    <section class="slide" data-index="7">
+      <div class="eyebrow">02 · Dasar Teori</div>
+      <h2>Operasi Penyisipan (Insert) pada BST</h2>
       <div class="body-area">
-        <div class="grid3">
+        <div class="grid2">
+          <ul class="points">
+            <li><span class="bullet-num">1</span><span>Operasi insert berfungsi memasukkan simpul data baru ke dalam struktur pohon.</span></li>
+            <li><span class="bullet-num">2</span><span>Pencarian dimulai dari simpul **Akar** (*root*).</span></li>
+            <li><span class="bullet-num">3</span><span>Bandingkan nilai baru: Jika **lebih kecil**, telusuri cabang **kiri**. Jika **lebih besar**, telusuri cabang **kanan**.</span></li>
+            <li><span class="bullet-num">4</span><span>Ulangi terus langkah tersebut secara rekursif hingga menemukan posisi kosong (`null`), lalu sisipkan simpul baru.</span></li>
+          </ul>
           <div class="card">
-            <div class="k">Operasi 01</div>
-            <h3>Insert</h3>
-            <p>Menyisipkan nilai baru dengan menelusuri pohon secara rekursif hingga menemukan posisi kosong yang sesuai aturan BST.</p>
-          </div>
-          <div class="card">
-            <div class="k">Operasi 02</div>
-            <h3>Search</h3>
-            <p>Membandingkan nilai target terhadap simpul saat ini, lalu bergerak ke kiri atau kanan hingga ditemukan.</p>
-          </div>
-          <div class="card">
-            <div class="k">Operasi 03</div>
-            <h3>Inorder Traversal</h3>
-            <p>Menelusuri kiri → simpul → kanan. Pada BST, hasilnya selalu berupa data <b style="color:var(--ink)">terurut menaik</b>.</p>
+            <div class="k">Prinsip Insert</div>
+            <h3>Pencarian Posisi Kosong</h3>
+            <p>Data baru tidak pernah menimpa data yang sudah ada, melainkan selalu menjadi **daun baru** (*new leaf*) di ujung cabang pohon.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 7 : IMPLEMENTASI -->
-    <section class="slide" data-index="6">
-      <div class="eyebrow">04 · Implementasi</div>
-      <h2>Inti program: kelas Node &amp; fungsi Search</h2>
+    <!-- 9 : OPERASI SEARCH -->
+    <section class="slide" data-index="8">
+      <div class="eyebrow">02 · Dasar Teori</div>
+      <h2>Operasi Pencarian (Search) pada BST</h2>
+      <div class="body-area">
+        <div class="grid2">
+          <div class="card">
+            <div class="k">Prinsip Pencarian</div>
+            <h3>Pencarian Biner / Eliminasi</h3>
+            <p>Pencarian pada BST mirip seperti algoritma *binary search*. Setiap langkah perbandingan akan mengeliminasi separuh subpohon yang tidak mungkin memuat nilai target.</p>
+          </div>
+          <ul class="points">
+            <li><span class="bullet-num">1</span><span>Bandingkan nilai target dengan simpul saat ini (mulai dari akar).</span></li>
+            <li><span class="bullet-num">2</span><span>Jika nilai target cocok, data **ditemukan** dan simulasinya selesai.</span></li>
+            <li><span class="bullet-num">3</span><span>Jika target lebih kecil, pencarian bergerak secara eksklusif ke cabang **anak kiri**.</span></li>
+            <li><span class="bullet-num">4</span><span>Jika target lebih besar, pencarian bergerak secara eksklusif ke cabang **anak kanan**.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 : OPERASI TRAVERSAL -->
+    <section class="slide" data-index="9">
+      <div class="eyebrow">02 · Dasar Teori</div>
+      <h2>Penelusuran Pohon: Inorder Traversal</h2>
+      <div class="body-area">
+        <div class="grid2">
+          <ul class="points">
+            <li><span class="bullet-num">1</span><span>*Traversal* adalah proses mengunjungi setiap simpul di dalam pohon tepat satu kali.</span></li>
+            <li><span class="bullet-num">2</span><span>**Inorder Traversal** menggunakan prinsip rekursif **LDR**: Kunjungi Kiri (*Left*), ambil simpul Induk (*Data*), lalu kunjungi Kanan (*Right*).</span></li>
+            <li><span class="bullet-num">3</span><span>Pada BST, penelusuran ini secara matematis akan **selalu menghasilkan data yang terurut menaik** (*ascending*).</span></li>
+            <li><span class="bullet-num">4</span><span>Sifat ini dimanfaatkan untuk melakukan penyortiran (*sorting*) data secara efisien.</span></li>
+          </ul>
+          <div class="card" style="text-align: center;">
+            <div class="k">Pola Kunjungan Simpul</div>
+            <div class="kicker-lg accent-text" style="font-size: 38px; margin: 10px 0;">Kiri → Induk → Kanan</div>
+            <p style="max-width: none;">Hasil output traversal selalu terurut dari nilai terkecil hingga terbesar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 : IMPLEMENTASI NODE -->
+    <section class="slide" data-index="10">
+      <div class="eyebrow">03 · Implementasi</div>
+      <h2>Struktur Data: Kelas Node &amp; Inisialisasi</h2>
       <div class="body-area" style="align-items:stretch;">
         <div class="grid2" style="align-items:stretch;">
           <div class="code-block"><span class="c-kw">class</span> <span class="c-fn">Node</span>:
     <span class="c-kw">def</span> __init__(self, value):
         self.value = value
-        self.left = <span class="c-kw">None</span>
-        self.right = <span class="c-kw">None</span>
+        self.left = <span class="c-kw">None</span>   <span class="c-cm"># Referensi ke anak kiri</span>
+        self.right = <span class="c-kw">None</span>  <span class="c-cm"># Referensi ke anak kanan</span></div>
+          <div class="code-block"><span class="c-kw">class</span> <span class="c-fn">BST</span>:
+    <span class="c-kw">def</span> __init__(self):
+        self.root = <span class="c-kw">None</span>   <span class="c-cm"># Menginisialisasi pohon kosong</span>
 
-<span class="c-cm"># insert: rekursif, kiri jika lebih kecil,</span>
-<span class="c-cm"># kanan jika lebih besar dari node saat ini</span></div>
+<span class="c-cm"># Kelas Node bertindak sebagai cetak biru simpul.</span>
+<span class="c-cm"># Kelas BST mengelola akar utama (root) pohon.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 : IMPLEMENTASI INSERT -->
+    <section class="slide" data-index="11">
+      <div class="eyebrow">03 · Implementasi</div>
+      <h2>Metode Penyisipan (Insert) Rekursif</h2>
+      <div class="body-area" style="align-items:stretch;">
+        <div class="grid2" style="align-items:stretch;">
+          <div class="code-block"><span class="c-kw">def</span> <span class="c-fn">insert</span>(self, value):
+    self.root = self._insert(self.root, value)
+
+<span class="c-kw">def</span> <span class="c-fn">_insert</span>(self, node, value):
+    <span class="c-kw">if</span> node <span class="c-kw">is None</span>:
+        <span class="c-kw">return</span> Node(value)  <span class="c-cm"># Buat simpul daun baru</span>
+    <span class="c-kw">if</span> value &lt; node.value:
+        node.left = self._insert(node.left, value)
+    <span class="c-kw">elif</span> value &gt; node.value:
+        node.right = self._insert(node.right, value)
+    <span class="c-kw">return</span> node</div>
+          <div class="card" style="justify-content: center; gap: 12px;">
+            <div class="k">Alur Rekursi</div>
+            <h3>Pencarian Posisi Kiri / Kanan</h3>
+            <p>Fungsi pembantu `_insert` menerima parameter simpul saat ini, mengecek nilai, dan memanggil dirinya sendiri ke cabang kiri atau kanan hingga menemukan posisi kosong.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 : IMPLEMENTASI SEARCH & INORDER -->
+    <section class="slide" data-index="12">
+      <div class="eyebrow">03 · Implementasi</div>
+      <h2>Metode Pencarian &amp; Penelusuran (Inorder)</h2>
+      <div class="body-area" style="align-items:stretch;">
+        <div class="grid2" style="align-items:stretch;">
           <div class="code-block"><span class="c-kw">def</span> <span class="c-fn">search</span>(self, value):
     current = self.root
     comparisons = 0
@@ -419,15 +550,45 @@
         <span class="c-kw">else</span>:
             current = current.right
     <span class="c-kw">return</span> <span class="c-kw">False</span>, comparisons</div>
+          <div class="code-block"><span class="c-kw">def</span> <span class="c-fn">inorder</span>(self, node, result):
+    <span class="c-kw">if</span> node <span class="c-kw">is not</span> <span class="c-kw">None</span>:
+        self.inorder(node.left, result)
+        result.append(node.value)
+        self.inorder(node.right, result)
+    <span class="c-kw">return</span> result
+
+<span class="c-cm"># Fungsi search berjalan secara iteratif (perulangan)</span>
+<span class="c-cm"># Fungsi inorder berjalan secara rekursif (LDR)</span></div>
         </div>
       </div>
     </section>
 
-    <!-- 8 : DATA UJI -->
-    <section class="slide" data-index="7">
-      <div class="eyebrow">05 · Hasil &amp; Pembahasan</div>
-      <h2>Data uji dan struktur pohon yang terbentuk</h2>
-      <p style="margin-bottom:6px;">Data disisipkan berurutan: <span class="tag" style="color:var(--accent)">50, 30, 70, 20, 40, 60, 80, 10, 25, 35, 45</span></p>
+    <!-- 14 : DATA UJI & SKENARIO -->
+    <section class="slide" data-index="13">
+      <div class="eyebrow">04 · Hasil &amp; Pembahasan</div>
+      <h2>Skenario Pengujian &amp; Data Uji</h2>
+      <div class="body-area">
+        <div class="grid2">
+          <ul class="points">
+            <li><span class="bullet-num">1</span><span>Data disisipkan ke dalam pohon satu per satu secara berurutan sesuai deret data uji.</span></li>
+            <li><span class="bullet-num">2</span><span><b>Deret Data Uji:</b> <span class="tag" style="color:var(--accent)">50, 30, 70, 20, 40, 60, 80, 10, 25, 35, 45</span>.</span></li>
+            <li><span class="bullet-num">3</span><span>Simpul pertama (**50**) secara otomatis bertindak sebagai **Akar (Root)** utama pohon.</span></li>
+            <li><span class="bullet-num">4</span><span>Nilai uji pencarian: **45** (ada di dasar), **10** (daun ujung kiri), dan **99** (tidak ada di pohon).</span></li>
+          </ul>
+          <div class="card">
+            <div class="k">Skenario Komparasi</div>
+            <h3>BST vs Pencarian Linear</h3>
+            <p>Kedua algoritma diuji untuk mencari nilai yang sama, dan program mencatat jumlah langkah perbandingan nilai yang dibutuhkan hingga selesai.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 : VISUALISASI POHON -->
+    <section class="slide" data-index="14">
+      <div class="eyebrow">04 · Hasil &amp; Pembahasan</div>
+      <h2>Struktur Pohon Biner yang Terbentuk</h2>
+      <p style="margin-bottom:6px;">Hasil visualisasi penempatan simpul di memori berdasarkan deret data uji dengan akar utama 50:</p>
       <div class="body-area">
         <svg viewBox="0 0 520 190" width="100%">
           <g stroke="#3A4A48" stroke-width="1.3">
@@ -454,123 +615,121 @@
       </div>
     </section>
 
-    <!-- 9 : INORDER -->
-    <section class="slide" data-index="8">
-      <div class="eyebrow">05 · Hasil &amp; Pembahasan</div>
-      <h2>Inorder traversal menghasilkan data terurut</h2>
+    <!-- 16 : HASIL TRAVERSAL -->
+    <section class="slide" data-index="15">
+      <div class="eyebrow">04 · Hasil &amp; Pembahasan</div>
+      <h2>Hasil Penelusuran (Inorder Traversal)</h2>
       <div class="body-area">
         <div style="width:100%;">
-          <p style="margin-bottom:22px;">Penelusuran <b>kiri → simpul → kanan</b> terhadap pohon pada slide sebelumnya menghasilkan urutan berikut:</p>
-          <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <span class="num" style="font-size:22px;">10</span>
-            <span style="color:var(--muted-2)">→</span>
-            <span class="num" style="font-size:22px;">20</span>
-            <span style="color:var(--muted-2)">→</span>
-            <span class="num" style="font-size:22px;">25</span>
-            <span style="color:var(--muted-2)">→</span>
-            <span class="num" style="font-size:22px;">30</span>
-            <span style="color:var(--muted-2)">→</span>
-            <span class="num" style="font-size:22px;">35</span>
-            <span style="color:var(--muted-2)">→</span>
-            <span class="num" style="font-size:22px;">40</span>
-            <span style="color:var(--muted-2)">→</span>
-            <span class="num" style="font-size:22px;">45</span>
-            <span style="color:var(--muted-2)">→</span>
-            <span class="num" style="font-size:22px;">50</span>
-            <span style="color:var(--muted-2)">→</span>
-            <span class="num" style="font-size:22px;">60</span>
-            <span style="color:var(--muted-2)">→</span>
-            <span class="num" style="font-size:22px;">70</span>
-            <span style="color:var(--muted-2)">→</span>
+          <p style="margin-bottom:22px;">Penelusuran rekursif **Kiri → Induk → Kanan** terhadap struktur pohon hasil pengujian menghasilkan output terurut sebagai berikut:</p>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom: 20px;">
+            <span class="num" style="font-size:22px;">10</span> <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">20</span> <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">25</span> <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">30</span> <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">35</span> <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">40</span> <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">45</span> <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">50</span> <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">60</span> <span style="color:var(--muted-2)">→</span>
+            <span class="num" style="font-size:22px;">70</span> <span style="color:var(--muted-2)">→</span>
             <span class="num" style="font-size:22px;">80</span>
           </div>
-          <p style="margin-top:22px;">Urutan ini <b style="color:var(--ink)">selalu menaik (ascending)</b> — membuktikan sifat dasar BST secara langsung dari hasil program.</p>
+          <p>Keluaran di atas **selalu dalam urutan menaik (ascending)**. Hasil simulasi ini membuktikan secara empiris kebenaran teori *inorder traversal* pada BST yang dipelajari dalam Matematika Komputasi.</p>
         </div>
       </div>
     </section>
 
-    <!-- 10 : PERBANDINGAN -->
-    <section class="slide" data-index="9">
-      <div class="eyebrow">05 · Hasil &amp; Pembahasan</div>
-      <h2>BST jauh lebih hemat perbandingan</h2>
+    <!-- 17 : PERBANDINGAN HASIL UJI -->
+    <section class="slide" data-index="16">
+      <div class="eyebrow">04 · Hasil &amp; Pembahasan</div>
+      <h2>Komparasi Jumlah Perbandingan Nilai</h2>
       <div class="body-area">
-        <table class="data">
-          <tr><th>Nilai Dicari</th><th>Ditemukan</th><th>Perbandingan BST</th><th>Perbandingan Linear</th></tr>
-          <tr><td class="hi">45</td><td>Ya</td><td class="hi accent-text">4</td><td>11</td></tr>
-          <tr><td class="hi">10</td><td>Ya</td><td class="hi accent-text">4</td><td>8</td></tr>
-          <tr><td class="hi">99</td><td>Tidak</td><td class="hi accent-text">3</td><td>11</td></tr>
-        </table>
+        <div class="grid2" style="width: 100%;">
+          <table class="data">
+            <tr><th>Nilai Dicari</th><th>Ditemukan</th><th>Perbandingan BST</th><th>Perbandingan Linear</th></tr>
+            <tr><td class="hi">45</td><td>Ya</td><td class="hi accent-text">4</td><td>11</td></tr>
+            <tr><td class="hi">10</td><td>Ya</td><td class="hi accent-text">4</td><td>8</td></tr>
+            <tr><td class="hi">99</td><td>Tidak</td><td class="hi accent-text">3</td><td>11</td></tr>
+          </table>
+          <div class="card">
+            <div class="k">Analisis Hasil</div>
+            <h3>BST Lebih Hemat Langkah</h3>
+            <p>Pencarian nilai **45** membutuhkan **11 langkah** pada pencarian linear karena letak datanya berada paling belakang, sedangkan pada BST hanya membutuhkan **4 langkah** perbandingan.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- 11 : PEMBAHASAN -->
-    <section class="slide" data-index="10">
-      <div class="eyebrow">05 · Hasil &amp; Pembahasan</div>
-      <h2>Kenapa BST lebih cepat?</h2>
+    <!-- 18 : ANALISIS KELAS KELAS -->
+    <section class="slide" data-index="17">
+      <div class="eyebrow">04 · Hasil &amp; Pembahasan</div>
+      <h2>Analisis Kompleksitas &amp; Keseimbangan</h2>
       <div class="body-area">
-        <ul class="points">
-          <li><span class="bullet-num">•</span><span>Setiap perbandingan <b>mengeliminasi separuh</b> sisa data yang mungkin — kompleksitas rata-rata <b class="accent-text">O(log n)</b>.</span></li>
-          <li><span class="bullet-num">•</span><span>Pencarian linear harus memeriksa data satu per satu — kompleksitas <b>O(n)</b> di semua kondisi.</span></li>
-          <li><span class="bullet-num">•</span><span>Keunggulan BST bergantung pada <b>keseimbangan pohon</b>. Data yang sudah terurut membuat BST menyerupai linked list (O(n)).</span></li>
-          <li><span class="bullet-num">•</span><span>Solusinya: varian pohon seimbang seperti <b>AVL Tree</b> atau <b>Red-Black Tree</b> pada aplikasi nyata.</span></li>
-        </ul>
+        <div class="grid2">
+          <ul class="points">
+            <li><span class="bullet-num">1</span><span><b>Kasus Rata-rata:</b> Bila pohon dalam keadaan seimbang, kompleksitas pencarian data adalah **$O(\log n)$**.</span></li>
+            <li><span class="bullet-num">2</span><span><b>Kasus Terburuk:</b> Bila data dimasukkan sudah terurut (misal: 10, 20, 30), pohon akan condong (*skewed*) menyerupai *linked list* dengan kompleksitas **$O(n)$**.</span></li>
+            <li><span class="bullet-num">3</span><span>Kinerja BST sangat bergantung pada aspek **Tinggi/Kedalaman Pohon**.</span></li>
+            <li><span class="bullet-num">4</span><span>Untuk menjamin performa $O(\log n)$, aplikasi nyata memanfaatkan tipe pohon seimbang seperti **AVL Tree** atau **Red-Black Tree**.</span></li>
+          </ul>
+          <div class="card" style="text-align: center;">
+            <div class="k">Visualisasi Kasus Terburuk</div>
+            <div class="kicker-lg accent-text" style="font-size: 26px; margin: 10px 0;">10 → 20 → 30 → 40</div>
+            <p style="max-width: none;">Pohon condong kehilangan sifat percabangannya dan menjadi pencarian linear biasa.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- 12 : KESIMPULAN -->
-    <section class="slide" data-index="11">
-      <div class="eyebrow">06 · Kesimpulan</div>
-      <h2>Tiga hal yang bisa dibawa pulang</h2>
+    <!-- 19 : KESIMPULAN -->
+    <section class="slide" data-index="18">
+      <div class="eyebrow">05 · Penutup</div>
+      <h2>Kesimpulan Makalah</h2>
       <div class="body-area">
         <div class="grid3">
           <div class="card">
             <div class="k">01</div>
-            <h3>Konsep Pohon</h3>
-            <p>BST adalah pohon biner yang menerapkan aturan pengurutan kiri &lt; simpul &lt; kanan.</p>
+            <h3>Penerapan Struktur</h3>
+            <p>Struktur data pohon terbukti efektif untuk memodelkan sistem hierarki data non-linear pada komputer.</p>
           </div>
           <div class="card">
             <div class="k">02</div>
-            <h3>Terbukti Bekerja</h3>
-            <p>Inorder traversal membuktikan sifat BST: hasil penelusuran selalu terurut menaik.</p>
+            <h3>Efisiensi Terbukti</h3>
+            <p>Pengujian menunjukkan BST menghemat perbandingan data secara logaritmik dibanding pencarian linear.</p>
           </div>
           <div class="card">
             <div class="k">03</div>
-            <h3>Lebih Efisien</h3>
-            <p>BST membutuhkan jauh lebih sedikit perbandingan dibanding pencarian linear pada data uji.</p>
+            <h3>Faktor Tinggi</h3>
+            <p>Keseimbangan pohon menentukan performa pencarian. Pohon condong memicu penurunan efisiensi.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 13 : REFERENSI -->
-    <section class="slide" data-index="12">
-      <div class="eyebrow">07 · Referensi</div>
-      <h2>Daftar Pustaka &amp; Sumber Pendukung</h2>
+    <!-- 20 : REFERENSI & DISKUSI -->
+    <section class="slide" data-index="19">
+      <div class="eyebrow">05 · Penutup</div>
+      <h2>Referensi &amp; Sesi Tanya Jawab</h2>
       <div class="body-area">
         <div class="grid2">
           <ul class="points">
-            <li><span class="bullet-num">1</span><span><b>Cormen, T. H., et al. (2022).</b> <i>Introduction to Algorithms</i> (4th ed.). MIT Press.</span></li>
-            <li><span class="bullet-num">2</span><span><b>Rosen, K. H. (2019).</b> <i>Discrete Mathematics and Its Applications</i> (8th ed.). McGraw-Hill.</span></li>
-            <li><span class="bullet-num">3</span><span><b>Munir, R. (2021).</b> <i>Matematika Diskrit</i> (Revisi Ke-6). Bandung: Penerbit Informatika.</span></li>
+            <li><span class="bullet-num">1</span><span>Cormen, T. H., et al. (2022). *Introduction to Algorithms* (4th ed.). MIT Press.</span></li>
+            <li><span class="bullet-num">2</span><span>Rosen, K. H. (2019). *Discrete Mathematics and Its Applications* (8th ed.). McGraw-Hill.</span></li>
+            <li><span class="bullet-num">3</span><span>Munir, R. (2021). *Matematika Diskrit* (Revisi Ke-6). Bandung: Penerbit Informatika.</span></li>
+            <li><span class="bullet-num">4</span><span>Pramudita, R., &amp; Handrianto, Y. (2020). *Analisis Perbandingan Algoritma Linear Search dan Binary Search.* Jurnal Infoman's, 14(2).</span></li>
           </ul>
-          <ul class="points">
-            <li><span class="bullet-num">4</span><span><b>Pramudita, R., &amp; Handrianto, Y. (2020).</b> <i>Analisis Perbandingan Algoritma Linear Search dan Binary Search dalam Efisiensi Pencarian Data.</i> Jurnal Infoman's, 14(2).</span></li>
-            <li><span class="bullet-num">5</span><span><b>Suryadi, A. (2019).</b> <i>Implementasi Teknik Binary Search Tree Pada Pencarian Data.</i> KAKIFIKOM, 1(2).</span></li>
-            <li><span class="bullet-num">6</span><span><b>Python Software Foundation (2026).</b> <i>The Python Language Reference.</i> <a href="https://docs.python.org/3/" target="_blank" style="color: var(--accent); text-decoration: none;">docs.python.org/3/</a></span></li>
-          </ul>
+          <div class="card" style="align-items: center; justify-content: center; text-align: center; height: 100%;">
+            <div class="k">Terima Kasih</div>
+            <h3 style="font-size: 20px;">Pertanyaan &amp; Diskusi</h3>
+            <p style="max-width: none; margin-top: 6px;">Simulasi Pencarian Data Menggunakan Binary Search Tree (BST) — SIF25202T Matematika Komputasi</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 14 : CLOSING -->
-    <section class="slide end-slide" data-index="13">
-      <div class="eyebrow" style="justify-content:center;">Terima Kasih</div>
-      <h1>Pertanyaan &amp; Diskusi</h1>
-      <p class="sub" style="max-width:100%; text-align:center; margin-top:16px;">Simulasi Pencarian Data Menggunakan Binary Search Tree (BST) — SIF25202T Matematika Komputasi</p>
-    </section>
-
     <div class="hud">
-      <div class="hud-label" id="slideLabel">01 / 13</div>
+      <div class="hud-label" id="slideLabel">01 / 20</div>
       <div class="dots" id="dots"></div>
       <div class="hud-label">SIF25202T</div>
     </div>
