@@ -331,10 +331,9 @@
       <div class="body-area">
         <div class="grid2">
           <ul class="points">
-            <li><span class="bullet-num">1</span><span><b>Definisi:</b> Pohon (<em>tree</em>) adalah graf tak-berarah terhubung yang tidak mengandung sirkuit atau siklus (<em>acyclic</em>).</span></li>
-            <li><span class="bullet-num">2</span><span>Sebuah pohon dengan <em>n</em> simpul (<em>vertex</em>) selalu memiliki tepat <b><em>n</em> &minus; 1 sisi (<em>edge</em>)</b> untuk menghubungkan seluruh simpulnya.</span></li>
-            <li><span class="bullet-num">3</span><span>Setiap pasang simpul di dalam pohon terhubung dengan <strong>lintasan tunggal</strong> (<em>unique path</em>).</span></li>
-            <li><span class="bullet-num">4</span><span>Penambahan satu sisi baru pada pohon akan membuat tepat satu sirkuit.</span></li>
+            <li><span class="bullet-num">1</span><span><b>Graf Aseptik:</b> Graf terhubung tak berarah tanpa sirkuit atau siklus (<em>acyclic</em>).</span></li>
+            <li><span class="bullet-num">2</span><span><b>Sifat Sisi:</b> Pohon dengan <em>n</em> simpul selalu memiliki tepat <b><em>n</em> &minus; 1 sisi</b>.</span></li>
+            <li><span class="bullet-num">3</span><span><b>Lintasan Tunggal:</b> Setiap pasang simpul hanya dihubungkan oleh satu lintasan unik.</span></li>
           </ul>
           <svg viewBox="0 0 320 220" width="100%">
             <g stroke="#3A4A48" stroke-width="1.4">
@@ -362,23 +361,23 @@
     <section class="slide" data-index="4">
       <div class="eyebrow">02 · Dasar Teori</div>
       <h2>Terminologi Pohon Berakar (Rooted Tree)</h2>
-      <p style="margin-bottom: 6px;">Berikut ini konsep pohon biner dan pohon terurut yang menjadi dasar BST:</p>
+      <p style="margin-bottom: 6px;">Tiga istilah utama pohon berakar yang menjadi pondasi dasar:</p>
       <div class="body-area">
         <div class="grid3">
           <div class="card">
             <div class="k">Induk &amp; Anak</div>
             <h3>Orangtua &amp; Anak</h3>
-            <p>Simpul di atas adalah orangtua (<em>parent</em>), simpul di bawahnya yang terhubung langsung adalah anak (<em>child</em>).</p>
+            <p>Hubungan hierarki langsung atas-bawah (<em>Parent &amp; Child</em>) di dalam pohon.</p>
           </div>
           <div class="card">
             <div class="k">Ujung Cabang</div>
             <h3>Daun (Leaf)</h3>
-            <p>Simpul yang tidak memiliki anak (derajat keluar = 0). Contoh pada graf adalah ujung terluar.</p>
+            <p>Simpul ujung terluar yang tidak memiliki anak sama sekali (derajat = 0).</p>
           </div>
           <div class="card">
             <div class="k">Kedalaman</div>
             <h3>Aras &amp; Tinggi</h3>
-            <p>Aras (<em>level</em>) dimulai dari 0 (akar). Tinggi (<em>height</em>) adalah aras maksimum dari suatu pohon berakar.</p>
+            <p>Aras (<em>level</em>) menyatakan tingkat kedalaman, tinggi (<em>height</em>) adalah aras maksimum.</p>
           </div>
         </div>
       </div>
@@ -391,10 +390,9 @@
       <div class="body-area">
         <div class="grid2">
           <ul class="points">
-            <li><span class="bullet-num">1</span><span><b>Pohon Biner:</b> Adalah pohon n-ary dengan <em>n</em> = 2. Setiap simpul cabangnya memiliki paling banyak 2 anak.</span></li>
-            <li><span class="bullet-num">2</span><span><b>Urutan Anak Penting:</b> Dibedakan secara eksplisit antara <strong>anak kiri</strong> (<em>left child</em>) dan <strong>anak kanan</strong> (<em>right child</em>).</span></li>
-            <li><span class="bullet-num">3</span><span><b>Pohon Terurut:</b> Urutan anak-anak diatur secara spesifik. Anak kiri dan anak kanan tidak boleh tertukar.</span></li>
-            <li><span class="bullet-num">4</span><span>BST menggabungkan kedua sifat ini untuk melakukan pemisahan data berdasarkan nilai numerik.</span></li>
+            <li><span class="bullet-num">1</span><span><b>Maksimal 2 Anak:</b> Setiap simpul cabang hanya boleh memiliki anak kiri (<em>left</em>) dan anak kanan (<em>right</em>).</span></li>
+            <li><span class="bullet-num">2</span><span><b>Pohon Terurut:</b> Posisi anak kiri dan kanan diatur spesifik dan tidak boleh saling bertukar.</span></li>
+            <li><span class="bullet-num">3</span><span><b>Dasar BST:</b> Kombinasi sifat biner dan terurut ini menjadi landasan pembentukan BST.</span></li>
           </ul>
           <svg viewBox="0 0 300 180" width="100%">
             <g stroke="#3A4A48" stroke-width="1.4">
@@ -418,10 +416,9 @@
       <div class="body-area">
         <div class="grid2">
           <ul class="points">
-            <li><span class="bullet-num">1</span><span>BST adalah pohon biner terurut dengan aturan perbandingan matematis.</span></li>
-            <li><span class="bullet-num">2</span><span>Nilai subpohon <b class="accent-text">kiri</b> selalu <b>lebih kecil</b> (&lt;) dari nilai simpul induk.</span></li>
-            <li><span class="bullet-num">3</span><span>Nilai subpohon <b class="accent-text">kanan</b> selalu <b>lebih besar</b> (&gt;) dari nilai simpul induk.</span></li>
-            <li><span class="bullet-num">4</span><span>Aturan ini berlaku secara <strong>rekursif</strong> pada setiap subpohon di dalam struktur data tersebut.</span></li>
+            <li><span class="bullet-num">1</span><span><b>Cabang Kiri:</b> Nilai simpul anak kiri selalu <b>lebih kecil</b> (&lt;) dari simpul induk.</span></li>
+            <li><span class="bullet-num">2</span><span><b>Cabang Kanan:</b> Nilai simpul anak kanan selalu <b>lebih besar</b> (&gt;) dari simpul induk.</span></li>
+            <li><span class="bullet-num">3</span><span><b>Sifat Rekursif:</b> Aturan perbandingan ini berlaku mutlak pada setiap tingkatan subpohon.</span></li>
           </ul>
           <svg viewBox="0 0 300 200" width="100%">
             <g stroke="#3A4A48" stroke-width="1.4">
@@ -452,15 +449,14 @@
       <div class="body-area">
         <div class="grid2">
           <ul class="points">
-            <li><span class="bullet-num">1</span><span>Operasi insert berfungsi memasukkan simpul data baru ke dalam struktur pohon.</span></li>
-            <li><span class="bullet-num">2</span><span>Pencarian dimulai dari simpul <strong>Akar</strong> (<em>root</em>).</span></li>
-            <li><span class="bullet-num">3</span><span>Bandingkan nilai baru: Jika <strong>lebih kecil</strong>, telusuri cabang <strong>kiri</strong>. Jika <strong>lebih besar</strong>, telusuri cabang <strong>kanan</strong>.</span></li>
-            <li><span class="bullet-num">4</span><span>Ulangi terus langkah tersebut secara rekursif hingga menemukan posisi kosong (`null`), lalu sisipkan simpul baru.</span></li>
+            <li><span class="bullet-num">1</span><span><b>Bandingkan Akar:</b> Mulai bandingkan nilai baru dengan simpul aktif (dimulai dari <em>root</em>).</span></li>
+            <li><span class="bullet-num">2</span><span><b>Navigasi Rekursif:</b> Bergerak ke cabang <b>kiri</b> jika lebih kecil, atau cabang <b>kanan</b> jika lebih besar.</span></li>
+            <li><span class="bullet-num">3</span><span><b>Penyisipan Daun:</b> Masukkan data sebagai <b>daun baru</b> saat menemukan posisi kosong (`null`).</span></li>
           </ul>
           <div class="card">
             <div class="k">Prinsip Insert</div>
-            <h3>Pencarian Posisi Kosong</h3>
-            <p>Data baru tidak pernah menimpa data yang sudah ada, melainkan selalu menjadi <strong>daun baru</strong> (<em>new leaf</em>) di ujung cabang pohon.</p>
+            <h3>Menjadi Daun Baru</h3>
+            <p>Data baru tidak akan pernah menimpa data lama, melainkan selalu menempati ujung cabang pohon kosong.</p>
           </div>
         </div>
       </div>
@@ -474,14 +470,13 @@
         <div class="grid2">
           <div class="card">
             <div class="k">Prinsip Pencarian</div>
-            <h3>Pencarian Biner / Eliminasi</h3>
-            <p>Pencarian pada BST mirip seperti algoritma <em>binary search</em>. Setiap langkah perbandingan akan mengeliminasi separuh subpohon yang tidak mungkin memuat nilai target.</p>
+            <h3>Eliminasi Jalur</h3>
+            <p>Setiap langkah perbandingan membuang setengah pilihan subpohon yang tidak sesuai, mempercepat pencarian target.</p>
           </div>
           <ul class="points">
-            <li><span class="bullet-num">1</span><span>Bandingkan nilai target dengan simpul saat ini (mulai dari akar).</span></li>
-            <li><span class="bullet-num">2</span><span>Jika nilai target cocok, data <strong>ditemukan</strong> dan simulasinya selesai.</span></li>
-            <li><span class="bullet-num">3</span><span>Jika target lebih kecil, pencarian bergerak secara eksklusif ke cabang <strong>anak kiri</strong>.</span></li>
-            <li><span class="bullet-num">4</span><span>Jika target lebih besar, pencarian bergerak secara eksklusif ke cabang <strong>anak kanan</strong>.</span></li>
+            <li><span class="bullet-num">1</span><span><b>Pengecekan Cocok:</b> Jika nilai target sama dengan simpul aktif, data berhasil ditemukan.</span></li>
+            <li><span class="bullet-num">2</span><span><b>Pengecekan Arah:</b> Telusuri anak <b>kiri</b> jika target lebih kecil, atau anak <b>kanan</b> jika target lebih besar.</span></li>
+            <li><span class="bullet-num">3</span><span><b>Batas Pencarian:</b> Berhenti jika mencapai posisi kosong (`null`), menandakan data tidak ada.</span></li>
           </ul>
         </div>
       </div>
@@ -494,15 +489,14 @@
       <div class="body-area">
         <div class="grid2">
           <ul class="points">
-            <li><span class="bullet-num">1</span><span><em>Traversal</em> adalah proses mengunjungi setiap simpul di dalam pohon tepat satu kali.</span></li>
-            <li><span class="bullet-num">2</span><span><strong>Inorder Traversal</strong> menggunakan prinsip rekursif <strong>LDR</strong>: Kunjungi Kiri (<em>Left</em>), ambil simpul Induk (<em>Data</em>), lalu kunjungi Kanan (<em>Right</em>).</span></li>
-            <li><span class="bullet-num">3</span><span>Pada BST, penelusuran ini secara matematis akan <strong>selalu menghasilkan data yang terurut menaik</strong> (<em>ascending</em>).</span></li>
-            <li><span class="bullet-num">4</span><span>Sifat ini dimanfaatkan untuk melakukan penyortiran (<em>sorting</em>) data secara efisien.</span></li>
+            <li><span class="bullet-num">1</span><span><b>Definisi Traversal:</b> Proses terstruktur mengunjungi seluruh simpul pohon masing-masing satu kali.</span></li>
+            <li><span class="bullet-num">2</span><span><b>Metode Inorder:</b> Mengikuti urutan rekursif LDR: kunjungi <b>Kiri &rarr; Induk &rarr; Kanan</b>.</span></li>
+            <li><span class="bullet-num">3</span><span><b>Output Terurut:</b> Penelusuran inorder pada BST secara otomatis menghasilkan data terurut menaik (<em>ascending</em>).</span></li>
           </ul>
           <div class="card" style="text-align: center;">
-            <div class="k">Pola Kunjungan Simpul</div>
-            <div class="kicker-lg accent-text" style="font-size: 38px; margin: 10px 0;">Kiri → Induk → Kanan</div>
-            <p style="max-width: none;">Hasil output traversal selalu terurut dari nilai terkecil hingga terbesar.</p>
+            <div class="k">Pola Kunjungan LDR</div>
+            <div class="kicker-lg accent-text" style="font-size: 36px; margin: 10px 0;">Kiri → Induk → Kanan</div>
+            <p style="max-width: none;">Menghasilkan data terurut terkecil ke terbesar secara alamiah.</p>
           </div>
         </div>
       </div>
